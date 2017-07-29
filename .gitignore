@@ -1,1 +1,3 @@
 src/my_ubuntu/sources.list
+src/python2.7/sources.list
+src/python3/sources.list
