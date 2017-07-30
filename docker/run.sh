@@ -1,14 +1,13 @@
 #!/bin/bash
 
-Container=jupyter
-Image=jupyter:init
-Volume=/media/sf_e:/src
-IP=127.0.0.1:8888:8888
+Image=$1
+Container=$2
+Volume=$3
 
-case $1 in
-    build)
-        echo "build $Image"
-        sudo docker build -t $Image ./
+case $4 in
+    pull)
+        echo "pull $Image"
+        sudo docker pull $Image
     ;;
     create)
         echo "create: name[$Container]"
@@ -18,6 +17,7 @@ case $1 in
      start)
          echo "start $Container"
          sudo docker start $Container
+         sudo docker ps | grep $Container
      ;;
      stop)
          echo "stop $Container"
@@ -28,6 +28,6 @@ case $1 in
          sudo docker rm -f $Container
      ;;
      *)
-         echo "usage:build|create|start|stop|remove"
+         echo "usage:pull|create|start|stop|remove"
      ;;
  esac
