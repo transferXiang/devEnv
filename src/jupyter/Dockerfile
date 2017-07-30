@@ -11,6 +11,7 @@ RUN apt-get update
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
 RUN pip3 install jupyter
+RUN pip3 install --upgrade pip
 
 # 端口
 EXPOSE 8888

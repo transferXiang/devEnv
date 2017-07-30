@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ContainerName=jupyter
+Container=jupyter
 Image=jupyter:init
 Volume=/media/sf_e:/src
 IP=127.0.0.1:8888:8888
@@ -11,20 +11,21 @@ case $1 in
         sudo docker build -t $Image ./
     ;;
     create)
-        echo "create: ip[$IP] name[$ContainerName]"
-        sudo docker run -d -p $IP -v $Volume --name $ContainerName $Image
+        echo "create: name[$Container]"
+        sudo docker run -d -P -v $Volume --name $Container $Image
+        sudo docker ps | grep $Container
     ;;
      start)
-         echo "start $ContainerName"
-         sudo docker start $ContainerName
+         echo "start $Container"
+         sudo docker start $Container
      ;;
      stop)
-         echo "stop $ContainerName"
-         sudo docker stop $ContainerName
+         echo "stop $Container"
+         sudo docker stop $Container
      ;;
      remove)
-         echo "remove: name[$ContainerName]"
-         sudo docker rm $ContainerName
+         echo "remove: $Container"
+         sudo docker rm -f $Container
      ;;
      *)
          echo "usage:build|create|start|stop|remove"
